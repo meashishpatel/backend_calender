@@ -12,15 +12,18 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5000", // For development
+  "https://calenderapplicationtracking.vercel.app/", // Your deployed frontend URL
+];
+
 app.use(
   cors({
-    origin: "calendar-application-for-communication-tracking-gamma.vercel.app", // Replace with your Vercel frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"], // Add methods as needed
-    credentials: true, // If cookies are used
+    origin: allowedOrigins,
+    credentials: true, // If using cookies or authentication headers
   })
 );
 
-app.use(cors());
 app.use(express.json());
 
 app.use("/api/admin", adminRoutes);
